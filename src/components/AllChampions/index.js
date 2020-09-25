@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import './index.css';
-import ChampionServices from '../../services/champions';
-import { Link } from 'react-router-dom';
-import { imageBaseUrl } from '../../constants/url';
+import React, { useEffect, useState } from "react";
+import "./index.css";
+import ChampionServices from "../../services/champions";
+import { Link } from "react-router-dom";
+import { imageBaseUrl } from "../../constants/url";
 
 export default function AllChampions({ name }) {
   const [champion, setChampion] = useState({});
 
   function adjustName(n) {
-    const arr = n.split('');
-    return arr.map((v, i) => {
-      if (v === ' ') {
+    const arr = n.split("");
+    arr.map((v, i) => {
+      if (v === " ") {
         arr.splice(i, 1);
       }
       if (v === "'") {
         arr[i + 1] = arr[i + 1].toLowerCase();
         arr.splice(i, 1);
       }
-      return arr.join('');
     });
+    return arr.join("");
   }
 
   const newName = adjustName(name);
@@ -35,23 +35,22 @@ export default function AllChampions({ name }) {
       setChampion(response.data[newName]);
     };
     fetchChampion();
-    // eslint-disable-next-line
   }, [name]);
 
   return (
     <div>
-      <div className='champion-block'>
+      <div className="champion-block">
         <Link to={`/${newName}`}>
           <h3>{name}</h3>
           <p>{champion.title}</p>
           <img src={imageBaseUrl + `/${newName}_0.jpg`} alt={name} />
         </Link>
-        <div className='pop-button' onClick={handlePopUp}>
+        <div className="pop-button" onClick={handlePopUp}>
           +
         </div>
       </div>
-      <div className={`${isActive ? 'active' : 'nonactive'} popup-container`}>
-        <div className='pop-up'>
+      <div className={`${isActive ? "active" : "nonactive"} popup-container`}>
+        <div className="pop-up">
           <button onClick={handlePopUp}>x</button>
           <h3>{name}</h3>
           <p>{champion.blurb}</p>
