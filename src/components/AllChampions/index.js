@@ -10,7 +10,7 @@ export default function AllChampions({ name }) {
   function adjustName(n) {
     const arr = n.split("");
     arr.map((v, i) => {
-      if (v == " ") {
+      if (v === " ") {
         arr.splice(i, 1);
       }
       if (v === "'") {
